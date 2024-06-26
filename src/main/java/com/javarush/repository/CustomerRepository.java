@@ -1,10 +1,10 @@
 package com.javarush.repository;
 
-import com.javarush.config.SessionCreater;
+import com.javarush.config.SessionCreator;
 import com.javarush.entity.Customer;
 
 public class CustomerRepository extends BaseRepository<Customer> {
-    public CustomerRepository(SessionCreater sessionCreater) {
-        super(sessionCreater, Customer.class);
+    public CustomerRepository(SessionCreator sessionCreator) {
+        super(sessionCreator, Customer.class);
     }
 }

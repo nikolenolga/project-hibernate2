@@ -47,9 +47,4 @@ public class Payment {
     @UpdateTimestamp
     private LocalDateTime lastUpdate;
 
-
-
-
-
-
 }

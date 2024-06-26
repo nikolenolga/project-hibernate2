@@ -1,6 +1,6 @@
 package com.javarush.service;
 
-import com.javarush.config.SessionCreater;
+import com.javarush.config.SessionCreator;
 import com.javarush.entity.*;
 import com.javarush.repository.*;
 import lombok.AllArgsConstructor;
@@ -8,7 +8,6 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.Year;
@@ -31,10 +30,10 @@ public class DemoService {
     private final ActorRepository actorRepository;
     private final CategoryRepository categoryRepository;
     private final FilmRepository filmRepository;
-    private final SessionCreater sessionCreater;
+    private final SessionCreator sessionCreator;
 
-    public String demoCreateCustomer() throws IOException {
-        Session session = sessionCreater.getSession();
+    public String demoCreateCustomer() {
+        Session session = sessionCreator.getSession();
         try (session) {
             Transaction transaction = session.beginTransaction();
             try {
@@ -51,14 +50,12 @@ public class DemoService {
                 Customer customer = Customer.builder()
                         .email("TestEmail")
                         .store(store)
-                        //.firstName("TestFirstName")
+                        .firstName("TestFirstName")
                         .address(address)
-                        //.lastName("TestLastName")
+                        .lastName("TestLastName")
                         .active(true)
                         .build();
 
-                customer.setFirstName("TestFirstName");
-                customer.setLastName("TestLastName");
                 customerRepository.create(customer);
                 transaction.commit();
                 return "Address created: %s%nCustomer created: %s".formatted(address, customer);
@@ -72,7 +69,7 @@ public class DemoService {
 
     public String demoCustomerReturnRental() {
         boolean noRentals = false;
-        Session session = sessionCreater.getSession();
+        Session session = sessionCreator.getSession();
         try (session) {
             Transaction transaction = session.beginTransaction();
             try {
@@ -95,7 +92,7 @@ public class DemoService {
     }
 
     public String demoCustomerRentedFilm() {
-        Session session = sessionCreater.getSession();
+        Session session = sessionCreator.getSession();
         try (session) {
             Transaction transaction = session.beginTransaction();
             try {
@@ -131,19 +128,15 @@ public class DemoService {
         }
     }
 
-    /*
-    Добавить транзакционный метод, который описывает событие «сняли новый фильм,
-    и он стал доступен для аренды». Фильм, язык, актеров, категории и т д выбери на свое усмотрение.
-    */
     public String demoCreateNewFilmAvailableForRental() {
-        Session session = sessionCreater.getSession();
+        Session session = sessionCreator.getSession();
         try (session) {
             Transaction transaction = session.beginTransaction();
             try {
                 Language language = languageRepository.getRandomEntity();
-                List<Actor> actories = actorRepository.getEntities(5, 5).toList();
+                List<Actor> actors = actorRepository.getEntities(5, 5).toList();
                 List<Category> categories = categoryRepository.getEntities(0, 3).toList();
-                        Film film = Film.builder()
+                Film film = Film.builder()
                         .title("TestTitle")
                         .description("TestDescription")
                         .releaseYear(Year.now())
@@ -153,7 +146,7 @@ public class DemoService {
                         .length((short) 3)
                         .replacementCost(BigDecimal.valueOf(33.5))
                         .rating(Rating.R)
-                        .actors(actories)
+                        .actors(actors)
                         .categories(categories)
                         .build();
 
@@ -164,9 +157,9 @@ public class DemoService {
 
                 transaction.commit();
                 return "Film created: %s%nLanguage: %s%nCategories: %s%nActors: %s%nSpecialFeatures: %s".formatted(film, language,
-                                categories.stream().map(Category::getName).collect(Collectors.joining(", ")),
-                                actories.stream().map(Actor::getFullName).collect(Collectors.joining(", ")),
-                                film.getSpecialFeatures());
+                        categories.stream().map(Category::getName).collect(Collectors.joining(", ")),
+                        actors.stream().map(Actor::getFullName).collect(Collectors.joining(", ")),
+                        film.getSpecialFeatures());
             } catch (Exception e) {
                 transaction.rollback();
                 return "Film creation FAILED!";

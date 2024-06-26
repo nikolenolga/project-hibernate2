@@ -28,9 +28,9 @@ public class Category {
     private LocalDateTime lastUpdate;
 
     @ManyToMany
-    @JoinTable(name="film_category",
-            joinColumns=  @JoinColumn(name="category_id", referencedColumnName="category_id"),
-            inverseJoinColumns= @JoinColumn(name="film_id", referencedColumnName="film_id") )
+    @JoinTable(name = "film_category",
+            joinColumns = @JoinColumn(name = "category_id", referencedColumnName = "category_id"),
+            inverseJoinColumns = @JoinColumn(name = "film_id", referencedColumnName = "film_id"))
     @ToString.Exclude
     private Collection<Film> films = new ArrayList<>();
 }

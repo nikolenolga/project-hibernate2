@@ -1,10 +1,10 @@
 package com.javarush.repository;
 
-import com.javarush.config.SessionCreater;
+import com.javarush.config.SessionCreator;
 import com.javarush.entity.Language;
 
-public class LanguageRepository extends BaseRepository<Language>{
-    public LanguageRepository(SessionCreater sessionCreater) {
-        super(sessionCreater, Language.class);
+public class LanguageRepository extends BaseRepository<Language> {
+    public LanguageRepository(SessionCreator sessionCreator) {
+        super(sessionCreator, Language.class);
     }
 }

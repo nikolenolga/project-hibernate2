@@ -17,7 +17,7 @@ import java.util.Collection;
 @ToString
 @Entity
 @Table(schema = "movie", name = "staff")
-public class Staff{
+public class Staff {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "staff_id")

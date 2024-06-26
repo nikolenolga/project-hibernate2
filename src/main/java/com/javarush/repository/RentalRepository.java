@@ -1,15 +1,15 @@
 package com.javarush.repository;
 
-import com.javarush.config.SessionCreater;
+import com.javarush.config.SessionCreator;
 import com.javarush.entity.Rental;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 import java.util.List;
 
-public class RentalRepository extends BaseRepository<Rental>{
-    public RentalRepository(SessionCreater sessionCreater) {
-        super(sessionCreater, Rental.class);
+public class RentalRepository extends BaseRepository<Rental> {
+    public RentalRepository(SessionCreator sessionCreator) {
+        super(sessionCreator, Rental.class);
     }
 
     public Rental getRandomOpenedRental() {

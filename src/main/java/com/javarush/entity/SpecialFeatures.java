@@ -1,9 +1,12 @@
 package com.javarush.entity;
 
+import lombok.Getter;
+
 import java.util.Arrays;
 
 import static java.util.Objects.isNull;
 
+@Getter
 public enum SpecialFeatures {
     TRAILERS("Trailers"),
     COMMENTARIES("Commentaries"),
@@ -16,12 +19,8 @@ public enum SpecialFeatures {
         this.value = value;
     }
 
-    public String getValue() {
-        return value;
-    }
-
     public static SpecialFeatures getByValue(String value) {
-        if(isNull(value) || value.isEmpty()) {
+        if (isNull(value) || value.isEmpty()) {
             return null;
         }
         return Arrays.stream(SpecialFeatures.values())

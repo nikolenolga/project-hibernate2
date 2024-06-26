@@ -39,12 +39,12 @@ public class Address {
     @UpdateTimestamp
     private LocalDateTime lastUpdate;
 
-//    @OneToMany(mappedBy = "address")
-//    @ToString.Exclude
-//    private final Collection<Customer> customers = new ArrayList<>();
-//
-//    @OneToMany(mappedBy = "address")
-//    @ToString.Exclude
-//    private final Collection<Staff> staffs = new ArrayList<>();
+    @OneToMany(mappedBy = "address")
+    @ToString.Exclude
+    private final Collection<Customer> customers = new ArrayList<>();
+
+    @OneToMany(mappedBy = "address")
+    @ToString.Exclude
+    private final Collection<Staff> staffs = new ArrayList<>();
 
 }

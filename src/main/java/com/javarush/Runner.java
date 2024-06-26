@@ -4,12 +4,10 @@ import com.javarush.config.ServiceLocator;
 import com.javarush.service.DemoService;
 import lombok.AllArgsConstructor;
 
-import java.io.IOException;
-
 @AllArgsConstructor
 public class Runner {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         DemoService demoService = ServiceLocator.getService(DemoService.class);
 
         String lineSeparator = "-------------------------------------------------------------------";

@@ -7,13 +7,12 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
 
 import java.io.Closeable;
-import java.io.IOException;
 import java.util.Properties;
 
-public class SessionCreater implements Closeable {
+public class SessionCreator implements Closeable {
     private final SessionFactory sessionFactory;
 
-    public SessionCreater() {
+    public SessionCreator() {
         Properties properties = new Properties();
         properties.put(Environment.DIALECT, "org.hibernate.dialect.MySQL8Dialect");
         //Change DRIVER and URL for p6spy logs
@@ -22,7 +21,7 @@ public class SessionCreater implements Closeable {
         properties.put(Environment.DRIVER, "com.mysql.jdbc.Driver");
         properties.put(Environment.URL, "jdbc:mysql://localhost:3306/movie");
         properties.put(Environment.USER, "root");
-        properties.put(Environment.PASS, "Kapibara");
+        properties.put(Environment.PASS, "mysql");
         properties.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
         properties.put(Environment.HBM2DDL_AUTO, "validate");
 
@@ -50,7 +49,7 @@ public class SessionCreater implements Closeable {
     }
 
     @Override
-    public void close() throws IOException {
+    public void close() {
         sessionFactory.close();
     }
 }
